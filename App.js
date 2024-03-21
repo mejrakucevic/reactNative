@@ -7,6 +7,7 @@ import {
   View,
   SafeAreaView,
   Button,
+  TextInput,
 } from "react-native";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
     name: "Spongebob",
     age: 27,
   });
+  const [age, setAge] = useState();
   const [img, setImg] = useState(require("./pics/spongebob.png"));
 
   const clickHandler = () => {
@@ -23,7 +25,7 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* header */}
       <View style={styles.header}>
         {/*<Text>My name is {name}</Text>*/}
@@ -34,7 +36,25 @@ export default function App() {
         <Button title="Next character" onPress={clickHandler} />
         <View style={styles.btnContainer}></View>
       </View>
-    </SafeAreaView>
+      <Text>Enter name: </Text>
+      <TextInput
+        multiline
+        style={styles.txtinput}
+        placeholder="e.g Jane Doe"
+        onChangeText={(val) => setName(val)}
+      />
+
+      <Text>Enter age: </Text>
+      <TextInput
+        keyboardType="numeric"
+        style={styles.txtinput}
+        placeholder="e.g 26"
+        onChangeText={(val2) => setAge(val2)}
+      />
+
+      <Text>Name: {name}</Text>
+      <Text>Age: {age}</Text>
+    </View>
   );
 }
 
@@ -42,6 +62,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    padding: 30,
   },
   header: {
     padding: 50,
@@ -66,5 +87,12 @@ const styles = StyleSheet.create({
     height: 200,
     marginLeft: 50,
     padding: 20,
+  },
+  txtinput: {
+    borderWidth: 1,
+    borderColor: "#777",
+    width: 150,
+    padding: 5,
+    marginBottom: 10,
   },
 });
