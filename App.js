@@ -8,6 +8,9 @@ import {
   SafeAreaView,
   Button,
   TextInput,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
 } from "react-native";
 
 export default function App() {
@@ -15,13 +18,45 @@ export default function App() {
     { name: "mejra", key: "1" },
     { name: "ena", key: "2" },
     { name: "sara", key: "3" },
-    { name: "mejra", key: "1" },
-    { name: "mejra", key: "1" },
+    { name: "charlie", key: "4" },
+    { name: "mOOOOO", key: "5" },
+    { name: "mOOOOO", key: "6" },
+    { name: "mOOOOO", key: "7" },
+    { name: "mOOOOO", key: "8" },
+    { name: "mOOOOO", key: "9" },
+    { name: "mOOOOO", key: "10" },
   ]);
-  return <View style={styles.container}></View>;
+  const pressHandler = (key) => {
+    console.log(key);
+    setPeople((prevPeople) => {
+      // for removing an item!!
+      return prevPeople.filter((person) => person.key != key);
+    });
+  };
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        numColumns={2}
+        data={people}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => pressHandler(item.key)}>
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
 
-  {
-    /*
+      {/* <ScrollView>
+        {people.map((item) => (
+          <View key={item.key}>
+            <Text style={styles.item}>{item.name}</Text>
+          </View>
+        ))}
+      </ScrollView> */}
+    </SafeAreaView>
+  );
+}
+
+/*
   const [name, setName] = useState("mejra");
   
   const [age, setAge] = useState();
@@ -35,14 +70,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       {/* header */
-  }
-  {
-    /*
+
+/*
       <View style={styles.header}>
         {/*<Text>My name is {name}</Text>*/
-  }
-  {
-    /*
+
+/*
         <Text>
           His name is {person.name} and he is {person.age} years old.
         </Text>
@@ -71,14 +104,22 @@ export default function App() {
     </View>
   );
 } */
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: "40",
+    paddingTop: "100",
     paddingHorizontal: "20",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  item: {
+    marginTop: 25,
+    padding: 20,
+    backgroundColor: "pink",
+    fontSize: 22,
+    marginHorizontal: 10,
+    marginTop: 25,
   },
 });
